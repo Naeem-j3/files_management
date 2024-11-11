@@ -1,0 +1,1666 @@
+{
+	"info": {
+		"_postman_id": "d14808c8-1d51-41ae-ab10-1a1ba51a283c",
+		"name": "internet_applications_project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28198307"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "naeem",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "naeem@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "ahmed",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "ahmed@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "12345678",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "naeem@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "groups",
+			"item": [
+				{
+					"name": "create group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Group2",
+									"type": "text"
+								},
+								{
+									"key": "user_ids[0]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "user_ids[1]",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/groups",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update group name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "ugroup",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/groups/1/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/groups/1/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invite members",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_ids[0]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "user_ids[1]",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/groups/1/invite",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"invite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add file to group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Lenovo/Desktop/first.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/groups/4/files",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"4",
+								"files"
+							]
+						},
+						"description": "### Add File to Group\n\nThis endpoint allows you to add a file to a specific group.\n\n#### Request Body\n\n- `file` (file): The file to be added to the group.\n    \n\n#### Response\n\nThe response will contain the details of the added file."
+					},
+					"response": []
+				},
+				{
+					"name": "approve file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/files/1/approve",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"files",
+								"1",
+								"approve"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show user's groups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/groups",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accept invitation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/groups/1/accept-invite",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"accept-invite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show group's files",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/groups/1/files",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"files"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get all users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:23:37 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:23:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"naeem\",\n            \"email\": \"naeem@gmail.com\",\n            \"email_verified_at\": null,\n            \"fcm_token\": null,\n            \"created_at\": \"2024-10-25T07:27:39.000000Z\",\n            \"updated_at\": \"2024-10-25T07:27:39.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"ahmed\",\n            \"email\": \"ahmed@gmail.com\",\n            \"email_verified_at\": null,\n            \"fcm_token\": null,\n            \"created_at\": \"2024-10-25T07:28:48.000000Z\",\n            \"updated_at\": \"2024-10-25T07:28:48.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"sami\",\n            \"email\": \"sami@gmail.com\",\n            \"email_verified_at\": null,\n            \"fcm_token\": null,\n            \"created_at\": \"2024-10-25T16:22:44.000000Z\",\n            \"updated_at\": \"2024-10-25T16:22:44.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"rama\",\n            \"email\": \"rama@gmail.com\",\n            \"email_verified_at\": null,\n            \"fcm_token\": null,\n            \"created_at\": \"2024-10-31T12:28:35.000000Z\",\n            \"updated_at\": \"2024-10-31T12:28:35.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "search users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/users/search?query=na",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "na"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "search users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/users/search?query=na",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"search"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "na"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:24:01 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:24:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"naeem\",\n            \"email\": \"naeem@gmail.com\",\n            \"email_verified_at\": null,\n            \"fcm_token\": null,\n            \"created_at\": \"2024-10-25T07:27:39.000000Z\",\n            \"updated_at\": \"2024-10-25T07:27:39.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "files",
+			"item": [
+				{
+					"name": "check-in",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_ids[0]",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/files/check-in",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"files",
+								"check-in"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "check-in success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file_ids[0]",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/files/check-in",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"files",
+										"check-in"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 15:44:21 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 15:44:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"first.txt\",\n            \"path\": \"group_files/1/first.txt\",\n            \"status\": \"reserved\",\n            \"user_id\": 2,\n            \"group_id\": 1,\n            \"is_approved\": 1,\n            \"created_at\": \"2024-10-25T07:53:05.000000Z\",\n            \"updated_at\": \"2024-11-01T15:44:21.000000Z\"\n        }\n    ],\n    \"message\": \"Files checked in (reserved) successfully.\"\n}"
+						},
+						{
+							"name": "check-in fail",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file_ids[0]",
+											"value": "5",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/files/check-in",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"files",
+										"check-in"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:14:25 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:14:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"All selected files must be free to check in.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "check-out",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files[0][uploaded_file]",
+									"type": "file",
+									"src": "/C:/Users/Lenovo/Desktop/first.txt"
+								},
+								{
+									"key": "files[0][file_id]",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/files/check-out",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"files",
+								"check-out"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get logs by file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/groups/1/files/1/logs",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"files",
+								"1",
+								"logs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/groups/1/files/1/logs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"groups",
+										"1",
+										"files",
+										"1",
+										"logs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:15:46 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:15:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"logs\": {\n        \"id\": 1,\n        \"name\": \"first.txt\",\n        \"path\": \"group_files/1/first.txt\",\n        \"status\": \"free\",\n        \"user_id\": 2,\n        \"group_id\": 1,\n        \"is_approved\": 1,\n        \"created_at\": \"2024-10-25T07:53:05.000000Z\",\n        \"updated_at\": \"2024-11-01T15:44:50.000000Z\",\n        \"actions\": [\n            {\n                \"id\": 6,\n                \"file_id\": 1,\n                \"user_id\": 1,\n                \"checked_out_at\": \"2024-11-01 15:44:50\",\n                \"checked_in_at\": \"2024-11-01 15:44:21\",\n                \"created_at\": \"2024-11-01T15:44:21.000000Z\",\n                \"updated_at\": \"2024-11-01T15:44:50.000000Z\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"naeem\",\n                    \"email\": \"naeem@gmail.com\"\n                }\n            },\n            {\n                \"id\": 5,\n                \"file_id\": 1,\n                \"user_id\": 1,\n                \"checked_out_at\": \"2024-11-01 15:37:47\",\n                \"checked_in_at\": \"2024-11-01 15:37:20\",\n                \"created_at\": \"2024-11-01T15:37:20.000000Z\",\n                \"updated_at\": \"2024-11-01T15:37:47.000000Z\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"naeem\",\n                    \"email\": \"naeem@gmail.com\"\n                }\n            },\n            {\n                \"id\": 4,\n                \"file_id\": 1,\n                \"user_id\": 1,\n                \"checked_out_at\": \"2024-10-31 09:28:26\",\n                \"checked_in_at\": \"2024-10-31 09:28:05\",\n                \"created_at\": \"2024-10-31T09:28:05.000000Z\",\n                \"updated_at\": \"2024-10-31T09:28:26.000000Z\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"naeem\",\n                    \"email\": \"naeem@gmail.com\"\n                }\n            },\n            {\n                \"id\": 3,\n                \"file_id\": 1,\n                \"user_id\": 1,\n                \"checked_out_at\": \"2024-10-31 09:20:15\",\n                \"checked_in_at\": \"2024-10-31 09:11:10\",\n                \"created_at\": \"2024-10-31T09:11:10.000000Z\",\n                \"updated_at\": \"2024-10-31T09:20:15.000000Z\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"naeem\",\n                    \"email\": \"naeem@gmail.com\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"file_id\": 1,\n                \"user_id\": 1,\n                \"checked_out_at\": \"2024-10-28 11:02:29\",\n                \"checked_in_at\": \"2024-10-28 10:58:46\",\n                \"created_at\": \"2024-10-28T10:58:46.000000Z\",\n                \"updated_at\": \"2024-10-28T11:02:29.000000Z\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"naeem\",\n                    \"email\": \"naeem@gmail.com\"\n                }\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Failure",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/groups/2/files/1/logs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"groups",
+										"2",
+										"files",
+										"1",
+										"logs"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:16:11 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:16:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"You do not belong to this group.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get logs by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/groups/1/users/1/logs",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"users",
+								"1",
+								"logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get logs by file pdf",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/groups/1/files/1/logs/download",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"files",
+								"1",
+								"logs",
+								"download"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get logs by users pdf",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/groups/1/users/1/logs/download",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"users",
+								"1",
+								"logs",
+								"download"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get file backups",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/files/1/backups",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"files",
+								"1",
+								"backups"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve the backups for the file with ID 1. The response will be in JSON format with a 200 status code.\n\n### Request Body\n\nThis request does not require a request body.\n\n### Response Body\n\nThe response will contain a JSON object with a \"status\" key indicating the success status, and a \"backups\" array containing objects with \"id\", \"file_id\", \"backup_path\", and \"created_at\" keys."
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/files/1/backups",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"files",
+										"1",
+										"backups"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 15:56:14 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 15:56:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"backups\": [\n        {\n            \"id\": 1,\n            \"file_id\": 1,\n            \"backup_path\": \"backups/first.txt-20241101153720\",\n            \"created_at\": \"2024-11-01 17:37:20\"\n        },\n        {\n            \"id\": 2,\n            \"file_id\": 1,\n            \"backup_path\": \"backups/first.txt-20241101154421\",\n            \"created_at\": \"2024-11-01 15:44:21\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "restore file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/files/1/backups/2/restore",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"files",
+								"1",
+								"backups",
+								"2",
+								"restore"
+							]
+						},
+						"description": "### Restore File Backup\n\nThis endpoint allows you to restore a specific backup of a file.\n\n**Request Body**\n\n- `backup_id` (text): The ID of the backup to be restored.\n    \n\n**Response**  \nThe response will be in JSON format with the following fields:\n\n- `status` (boolean): Indicates the status of the restore operation.\n    \n- `file` (object): Details of the restored file, including its ID, name, path, status, user ID, group ID, approval status, creation timestamp, and last update timestamp.\n    \n\nExample:\n\n``` json\n{\n    \"status\": true,\n    \"file\": {\n        \"id\": 0,\n        \"name\": \"\",\n        \"path\": \"\",\n        \"status\": \"\",\n        \"user_id\": 0,\n        \"group_id\": 0,\n        \"is_approved\": 0,\n        \"created_at\": \"\",\n        \"updated_at\": \"\"\n    }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "restore file",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/files/1/backups/2/restore",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"files",
+										"1",
+										"backups",
+										"2",
+										"restore"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:23:07 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 16:23:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"file\": {\n        \"id\": 1,\n        \"name\": \"first.txt\",\n        \"path\": \"group_files/1/first.txt\",\n        \"status\": \"free\",\n        \"user_id\": 2,\n        \"group_id\": 1,\n        \"is_approved\": 1,\n        \"created_at\": \"2024-10-25T07:53:05.000000Z\",\n        \"updated_at\": \"2024-11-01T15:44:50.000000Z\"\n    },\n    \"message\": \"The file was successfully restored\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/test1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"test1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "1|xQAgdMJpRBKjkCipVccQJw8hkVlwUktQNTx2eeYGbb37af49",
+			"type": "string"
+		}
+	]
+}
