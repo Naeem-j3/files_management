@@ -51,8 +51,16 @@ class User extends Authenticatable
     public function groups()
     {
         return $this->belongsToMany(Group::class, 'group_users', 'user_id', 'group_id')
-            ->withPivot('status') // Include the `status` field from the pivot table
-            ->wherePivot('status', 'accepted'); // Only get users with 'accepted' status
+            ->withPivot('status')
+            ->wherePivot('status', 'accepted');
+
+    }
+
+    public function invitedGroups()
+    {
+        return $this->belongsToMany(Group::class, 'group_users', 'user_id', 'group_id')
+            ->withPivot('id','status')
+            ->wherePivot('status', 'invited');
 
     }
 

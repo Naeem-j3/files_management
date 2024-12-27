@@ -12,6 +12,7 @@
         "kreait/laravel-firebase": "^5.9",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
+        "laravel/telescope": "^5.2",
         "laravel/tinker": "^2.8",
         "ray/aop": "^2.16"
     },

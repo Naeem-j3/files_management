@@ -188,7 +188,7 @@ class GroupService
             ->where('status', 'invited')  // Ensure they were invited
             ->first();
 
-        // If no invitation found, throw an error
+
         if (!$groupUser) {
             throw new ModelNotFoundException('Invitation not found or already accepted.');
         }

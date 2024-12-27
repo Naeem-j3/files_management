@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Proxies\FileLogServiceProxy;
 use App\Services\FileLogService;
 use Exception;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ class FileLogController extends Controller
 {
     protected $fileLogService;
 
-    public function __construct(FileLogService $fileLogService)
+    public function __construct(FileLogServiceProxy $fileLogService)
     {
         $this->fileLogService = $fileLogService;
     }

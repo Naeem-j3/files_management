@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateGroupRequest;
 use App\Http\Requests\FileRequest;
+use App\Proxies\GroupServiceProxy;
 use App\Services\GroupService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class GroupController extends Controller
 
     protected $groupService;
 
-    public function __construct(GroupService $groupService)
+    public function __construct(GroupServiceProxy  $groupService)
     {
         $this->groupService = $groupService;
     }

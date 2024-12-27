@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Proxies\FileServiceProxy;
 use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,7 @@ class FileController extends Controller
 {
     protected $fileService;
 
-    public function __construct(FileService $fileService)
+    public function __construct(FileServiceProxy $fileService)
     {
         $this->fileService = $fileService;
     }
@@ -80,5 +81,34 @@ class FileController extends Controller
             return response()->json(['status' => false, 'message' => $e->getMessage()], 400);
         }
     }
+    public function downloadFile($groupId, $fileId)
+    {
+        $userId = Auth::id(); // Get the authenticated user ID
 
+        try {
+            // Delegate file download to the service
+            return $this->fileService->downloadFile($groupId, $fileId, $userId);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], 403);
+        }
+    }
+    public function showFile($fileId){
+        $file=$this->fileService->showFile($fileId);
+
+        if(!$file){
+            return response()->json([
+                'status' => false,
+                'message'=>'file not found'
+            ], 200);
+        }
+        return response()->json([
+            'status' => true,
+            'file'=>$file
+        ], 200);
+
+
+    }
 }

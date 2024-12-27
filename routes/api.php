@@ -23,7 +23,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/test',function (){
 //    return \App\Models\Group::where('id',1)->first()->users;
-//    return response()->json("hi",200);
+    return response()->json("hi",200);
 
 });
 Route::get('/test1', [GroupController::class, 'test']);
@@ -39,13 +39,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/groups/{groupId}/files', [GroupController::class, 'showGroupFiles']);
     Route::put('/groups/{groupId}/update', [GroupController::class, 'updateGroup'])->middleware('check.owner');;
     Route::delete('/groups/{groupId}/delete', [GroupController::class, 'deleteGroup'])->middleware('check.owner');;
+
     //users
     Route::get('/users', [UserController::class, 'getAllUsers']);
+    Route::get('/users/exclude-group/{groupId}', [UserController::class, 'getUsersExcludingGroup']);
     Route::get('/users/search', [UserController::class, 'searchUsers']);
+    Route::get('/users/invitations', [UserController::class, 'showInvitaion']);
     //files
     Route::post('/files/check-out', [FileController::class, 'checkOutFiles']);
     Route::post('/files/check-in', [FileController::class, 'checkInFiles']);
-
+    Route::get('/files/{fileId}/show', [FileController::class, 'showFile']);
     Route::get('/files/{fileId}/backups', [FileController::class, 'getFileBackups']);
     Route::post('/files/{fileId}/backups/{backupId}/restore', [FileController::class, 'restoreFileFromBackup']);
 
@@ -54,6 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/groups/{groupId}/users/{userId}/logs', [FileLogController::class, 'getLogsByUser'])->middleware('check.owner');
     Route::get('/groups/{groupId}/files/{fileId}/logs/download', [FileLogController::class, 'downloadLogsByFilePdf'])->middleware('check.group.membership');
     Route::get('/groups/{groupId}/users/{userId}/logs/download', [FileLogController::class, 'downloadLogsByUserPdf'])->middleware('check.owner');
+    Route::get('/groups/{groupId}/files/{fileId}/download', [FileController::class, 'downloadFile'])->middleware('check.group.membership');
 });
 
 

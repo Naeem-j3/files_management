@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\GroupUser;
 use App\Models\User;
 use App\Repositories\users\UserRepositoryInterface;
+use GPBMetadata\Google\Api\Auth;
 
 class UserService
 {
@@ -21,5 +23,20 @@ class UserService
     public function searchUsers($query)
     {
         return $this->userRepository->searchUserByNameOrEmail($query); // Search for users by name or email
+    }
+    public function getUsersExcludingGroup($groupId)
+    {
+        return User::whereDoesntHave('groups', function ($query) use ($groupId) {
+            $query->where('group_id', $groupId);
+        })->where('is_admin',0)->get();
+    }
+
+    public function showInvitaion($user)
+    {
+
+        $invitaion=$user->invitedGroups->load('owner');
+
+
+        return $invitaion;
     }
 }

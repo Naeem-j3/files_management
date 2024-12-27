@@ -40,19 +40,21 @@ class AuthService
     {
 
         if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json([
-                'status'=>false,
-                'data' => [],
+            return [
+                'status' => false,
                 'message' => 'Password or email is incorrect',
-            ],400);
+            ];
         }
 
         $user = User::where('email', $request->email)->first();
         $token = $user->createToken('appToken')->plainTextToken;
-
+//dd($user,$token);
         return [
-            'user' => $user,
-            'token' => $token
+            'status'=>true,
+            'data' => [ // Return only the necessary data
+                'user' => $user,
+                'token' => $token,
+            ],
         ];
     }
 

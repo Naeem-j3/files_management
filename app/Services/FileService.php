@@ -4,6 +4,8 @@ namespace App\Services;
 use App\Models\File;
 use App\Models\FileBackup;
 use App\Models\FileCheckout;
+use App\Repositories\files\FileRepository;
+use App\Repositories\files\FileRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FileService
 {
+
 
     public function checkInFiles(array $fileIds, int $userId)
     {
@@ -144,4 +147,23 @@ class FileService
             throw new Exception("Failed to restore file ID {$fileId} from backup: " . $e->getMessage());
         }
     }
+    public function downloadFile($groupId, $fileId, $userId)
+    {
+        // Retrieve the file and ensure it belongs to the group
+        $file = File::where('id', $fileId)
+            ->where('group_id', $groupId)
+            ->firstOrFail();
+
+        // Check if the file exists on the server
+        $filePath = storage_path('app/public/' . $file->path);
+        if (!file_exists($filePath)) {
+            throw new \Exception('File not found on the server.');
+        }
+        return response()->download($filePath, $file->name);
+    }
+    public function showFile($fileId){
+        $file=File::where('id',$fileId)->with('user:id,name')->first();
+        return $file;
+    }
+
 }

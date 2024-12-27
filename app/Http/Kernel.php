@@ -65,5 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check.owner' => \App\Http\Middleware\CheckGroupOwner::class,
         'check.group.membership' => \App\Http\Middleware\CheckGroupMembership::class,
+        'is_admin'=>\App\Http\Middleware\CheckAdmin::class,
+        'log.execution' => \App\Http\Middleware\LogMethodExecution::class,
     ];
 }
