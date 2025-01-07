@@ -56,9 +56,8 @@ class GroupService
     // Update a group (only by the owner)
     public function updateGroup($groupId, $newGroupName)
     {
-        $group = Group::findOrFail($groupId);
-        $group->name = $newGroupName;
-        $group->save();
+//        $group = Group::findOrFail($groupId);
+        $group=$this->groupRepository->update($groupId, $newGroupName);
         return $group;
     }
 

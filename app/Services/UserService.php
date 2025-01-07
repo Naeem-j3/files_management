@@ -33,10 +33,7 @@ class UserService
 
     public function showInvitaion($user)
     {
-
         $invitaion=$user->invitedGroups->load('owner');
-
-
         return $invitaion;
     }
 }

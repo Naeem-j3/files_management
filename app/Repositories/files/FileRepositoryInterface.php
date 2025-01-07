@@ -7,4 +7,7 @@ interface FileRepositoryInterface
     public function create(array $data);
     public function delete($fileId);
     public function find($fileId);
+    public function createCheckin($fileId,$userId);
+    public function createBackUp($fileId,$backupPath);
+
 }

@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Storage;
 
 class FileService
 {
-
+    protected $fileRepository;
+    public function __construct(FileRepositoryInterface $fileRepository)
+    {
+        $this->fileRepository=$fileRepository;
+    }
 
     public function checkInFiles(array $fileIds, int $userId)
     {
@@ -36,12 +40,13 @@ class FileService
                 $file->update(['status' => 'reserved']);
 
                 // Log the check-out in file_checkouts
-                FileCheckout::create([
-                    'file_id' => $file->id,
-                    'user_id' => $userId,
-                    'checked_out_at' => null,
-                    'checked_in_at' => now()
-                ]);
+                $this->fileRepository->createCheckin($file->id,$userId);
+//                FileCheckout::create([
+//                    'file_id' => $file->id,
+//                    'user_id' => $userId,
+//                    'checked_out_at' => null,
+//                    'checked_in_at' => now()
+//                ]);
             }
 
             DB::commit();
@@ -101,12 +106,12 @@ class FileService
             $backupPath = "backups/" . $file->name . "-" . now()->format('YmdHis');
 
             Storage::disk('public')->copy($file->path, $backupPath);
-
-            FileBackup::create([
-                'file_id' => $file->id,
-                'backup_path' => $backupPath,
-                'created_at' => now()
-            ]);
+            $this->fileRepository->createBackUp($file->id,$backupPath);
+//            FileBackup::create([
+//                'file_id' => $file->id,
+//                'backup_path' => $backupPath,
+//                'created_at' => now()
+//            ]);
 
         } catch (Exception $e) {
             // Log any backup errors for debugging
