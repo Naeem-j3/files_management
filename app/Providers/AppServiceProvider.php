@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(AuthServiceProxy::class, function ($app) {
             return new AuthServiceProxy(
                 $app->make(AuthService::class),
-                $app->make(AuthServiceAspect::class)
+                $app->make(Aspect::class)
             );
         });
 
@@ -61,7 +61,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(GroupServiceProxy::class, function ($app) {
             return new GroupServiceProxy(
                 $app->make(GroupService::class),
-                $app->make(GroupServiceAspect::class)
+                $app->make(Aspect::class)
             );
         });
 
