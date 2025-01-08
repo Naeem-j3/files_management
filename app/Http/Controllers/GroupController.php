@@ -199,6 +199,28 @@ class GroupController extends Controller
             'message' => $groups,
         ], 200);
     }
+
+    public function showGroupDetails($groupId)
+    {
+        $userId = Auth::id(); // Get the authenticated user ID
+
+        try {
+            // Get group details using the service
+            $groupDetails = $this->groupService->getGroupDetails($groupId, $userId);
+
+            return response()->json([
+                'status' => true,
+                'data' => $groupDetails,
+            ], 200);
+
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], 403);
+        }
+    }
+
     public function test(){
         return $this->groupService->test();
     }

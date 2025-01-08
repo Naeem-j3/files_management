@@ -172,7 +172,9 @@ class GroupService
     {
         $user = User::find($userId);
         $groups = $user->groups()->with('owner:id,name,email')->get();
-
+        $groups->each(function ($group) use ($userId) {
+            $group->is_owner = $group->owner_id === $userId;
+        });
         // Hide pivot data from each group
         $groups->makeHidden('pivot');
        return $groups;
@@ -215,6 +217,33 @@ class GroupService
         // Retrieve and return all files for the group
         return File::where('group_id', $groupId)->where('is_approved',1)->get();
     }
+
+    public function getGroupDetails($groupId, $userId)
+    {
+        // Check if the user is a member of the group
+        $groupUser = GroupUser::where('group_id', $groupId)
+            ->where('user_id', $userId)
+            ->where('status', 'accepted')
+            ->first();
+
+        if (!$groupUser) {
+            throw new ModelNotFoundException('You must be an accepted member of the group to view its details.');
+        }
+
+        // Fetch the group with details (files, accepted users, and owner)
+        $group = Group::with(['files', 'users:id,name,email', 'owner:id,name,email'])->findOrFail($groupId);
+
+        // Determine if the requesting user is the owner
+        $group->is_owner = $group->owner_id === $userId;
+
+        // Include only approved files for non-owners
+        if (!$group->is_owner) {
+            $group->files = $group->files->where('is_approved', true);
+        }
+
+        return $group;
+    }
+
     public function test(){
         $title = "Group Invitation";
         $body = "You've been invited to join a group.";

@@ -18,6 +18,9 @@ class CheckGroupOwner
     {
         $groupId = $request->route('groupId'); // Assuming groupId is a route parameter
         $userId = $request->user()->id; // Authenticated user's ID
+        if ($request->user()->is_admin) {
+            return $next($request);
+        }
         // Check if the authenticated user is the owner of the group
         $group = Group::find($groupId);
         if (!$group || $group->owner_id !== $userId) {

@@ -19,7 +19,9 @@ class CheckGroupMembership
     {
         $userId = Auth::id();
         $groupId = $request->route('groupId');
-
+        if ($request->user()->is_admin) {
+            return $next($request);
+        }
         // Check if the authenticated user is a member of the specified group
         $isMember = GroupUser::where('group_id', $groupId)
             ->where('user_id', $userId)

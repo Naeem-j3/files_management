@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/groups/{groupId}/files', [GroupController::class, 'showGroupFiles']);
     Route::put('/groups/{groupId}/update', [GroupController::class, 'updateGroup'])->middleware('check.owner');;
     Route::delete('/groups/{groupId}/delete', [GroupController::class, 'deleteGroup'])->middleware('check.owner');;
+    Route::get('groups/{groupId}/details', [GroupController::class, 'showGroupDetails']);
 
     //users
     Route::get('/users', [UserController::class, 'getAllUsers']);
