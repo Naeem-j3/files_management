@@ -101,8 +101,8 @@ class GroupController extends Controller
 
             return response()->json([
                 'status' => true,
-                'data' => $data,
-                'message' => 'File uploaded and awaiting approval',
+                'data' => $data['file'],
+                'message' => $data['message'],
             ]);
 
         } catch (ModelNotFoundException $e) {

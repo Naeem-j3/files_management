@@ -133,22 +133,26 @@ class GroupService
         $filePath = $file->storeAs("group_files/{$groupId}", $fileName, 'public');
         $is_owner=$groupUser->groups->owner_id==$userId;
     if($is_owner){
-        return $this->fileRepository->create([
+        $data['file']= $this->fileRepository->create([
             'name' => $fileName,
             'path' => $filePath,
             'group_id' => $groupId,
             'user_id' => $userId,
             'is_approved' => true
         ]);
+        $data['message']='the file added successfully';
+        return $data;
     }
     else{
-        return $this->fileRepository->create([
+        $data['file']=$this->fileRepository->create([
             'name' => $fileName,
             'path' => $filePath,
             'group_id' => $groupId,
             'user_id' => $userId,
             'is_approved' => false
         ]);
+        $data['message']='File uploaded and awaiting approval';
+        return $data;
     }
 
     }

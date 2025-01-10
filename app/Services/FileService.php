@@ -78,7 +78,14 @@ class FileService
                 $file = File::where('id', $data['file_id'])
                     ->where('status', 'reserved')
                     ->firstOrFail();
+                $fileCheckout = FileCheckout::where('file_id', $file->id)
+                    ->where('user_id', $userId) // Ensure this is the same user
+                    ->whereNull('checked_out_at')
+                    ->first();
 
+                if (!$fileCheckout) {
+                    throw new Exception("You are not authorized to check out this file or it is not reserved for you.");
+                }
                 if ($file->name !== $data['uploaded_file']->getClientOriginalName()) {
                     throw new Exception("File name mismatch for file: " . $file->name);
                 }
@@ -87,10 +94,7 @@ class FileService
 
                 $file->update(['path' => $filePath, 'status' => 'free']);
 
-                FileCheckout::where('file_id', $file->id)
-                    ->where('user_id', $userId)
-                    ->whereNull('checked_out_at')
-                    ->update(['checked_out_at' => now()]);
+                $fileCheckout->update(['checked_out_at' => now()]);
             }
 
             DB::commit();

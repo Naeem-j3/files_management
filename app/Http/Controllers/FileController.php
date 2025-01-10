@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Proxies\FileServiceProxy;
 use App\Services\FileService;
 use Illuminate\Http\Request;
@@ -75,6 +76,11 @@ class FileController extends Controller
     public function restoreFileFromBackup(int $fileId, int $backupId)
     {
         try {
+            $file = File::findOrFail($fileId);
+            if($file->status=='reserved'){
+                return response()->json(['status' => false,'message' => "The file is reserved you can't restore it util be free"], 400);
+            }
+
             $restoredFile = $this->fileService->restoreFileFromBackup($fileId, $backupId);
             return response()->json(['status' => true, 'file' => $restoredFile,'message' => "The file was successfully restored"], 200);
         } catch (Exception $e) {

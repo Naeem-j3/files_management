@@ -47,6 +47,13 @@ class AuthService
         }
 
         $user = User::where('email', $request->email)->first();
+        // Check if an FCM token is provided in the request
+        if ($request->has('fcm_token')) {
+            // Update the FCM token in the database
+            $user->update([
+                'fcm_token' => $request->fcm_token,
+            ]);
+        }
         $token = $user->createToken('appToken')->plainTextToken;
 //dd($user,$token);
         return [
