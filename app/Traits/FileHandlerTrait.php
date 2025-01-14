@@ -17,8 +17,8 @@ trait FileHandlerTrait
     // Delete a specific file if needed
     public function deleteFile($filePath)
     {
-        if (Storage::exists($filePath)) {
-            Storage::delete($filePath);
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($filePath);
         }
     }
 }

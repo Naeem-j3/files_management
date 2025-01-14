@@ -117,4 +117,23 @@ class FileController extends Controller
 
 
     }
+    public function deleteFile($fileId)
+    {
+        $userId = Auth::id(); // Get the authenticated user ID
+
+        try {
+            $this->fileService->deleteFileG($fileId, $userId);
+            return response()->json([
+                'status' => true,
+                'message' => 'File deleted successfully.',
+            ], 200);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+    }
+
 }

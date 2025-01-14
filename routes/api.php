@@ -52,6 +52,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/files/{fileId}/show', [FileController::class, 'showFile']);
     Route::get('/files/{fileId}/backups', [FileController::class, 'getFileBackups']);
     Route::post('/files/{fileId}/backups/{backupId}/restore', [FileController::class, 'restoreFileFromBackup']);
+    Route::delete('/files/{fileId}/delete', [FileController::class, 'deleteFile']);
+
 
     //log
     Route::get('/groups/{groupId}/files/{fileId}/logs', [FileLogController::class, 'getLogsByFile'])->middleware('check.group.membership');

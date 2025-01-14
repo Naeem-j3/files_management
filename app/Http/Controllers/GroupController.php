@@ -71,7 +71,7 @@ class GroupController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => $e->getMessage(),
-            ], 403);
+            ], 400);
         }
     }
 
@@ -220,6 +220,7 @@ class GroupController extends Controller
             ], 403);
         }
     }
+
 
     public function test(){
         return $this->groupService->test();

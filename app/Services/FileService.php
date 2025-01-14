@@ -6,6 +6,7 @@ use App\Models\FileBackup;
 use App\Models\FileCheckout;
 use App\Repositories\files\FileRepository;
 use App\Repositories\files\FileRepositoryInterface;
+use App\Traits\FileHandlerTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FileService
 {
+    use FileHandlerTrait;
     protected $fileRepository;
     public function __construct(FileRepositoryInterface $fileRepository)
     {
@@ -173,6 +175,30 @@ class FileService
     public function showFile($fileId){
         $file=File::where('id',$fileId)->with('user:id,name')->first();
         return $file;
+    }
+    public function deleteFileG(int $fileId, int $userId)
+    {
+        DB::beginTransaction();
+
+        try {
+            // Fetch the file
+            $file = File::findOrFail($fileId);
+
+            // Check if the authenticated user is the owner of the group the file belongs to
+            $group = $file->group; // Assuming there is a `group` relationship in the `File` model
+            if (!$group || $group->owner_id !== $userId) {
+                throw new Exception("You are not authorized to delete this file.");
+            }
+            $this->deleteFile($file->path);
+            $file->delete();
+
+            DB::commit();
+            return true;
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw new Exception("Failed to delete file: " . $e->getMessage());
+        }
     }
 
 }
