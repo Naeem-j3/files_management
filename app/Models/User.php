@@ -65,6 +65,11 @@ class User extends Authenticatable
             ->wherePivot('status', 'invited');
 
     }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
 
 
 }

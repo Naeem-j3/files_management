@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Storage;
 class FileService
 {
     use FileHandlerTrait;
-    protected $fileRepository;
-    public function __construct(FileRepositoryInterface $fileRepository)
+    protected $fileRepository,$notifications;
+    public function __construct(FileRepositoryInterface $fileRepository,NotificationService $notifications)
     {
         $this->fileRepository=$fileRepository;
+        $this->notifications=$notifications;
     }
 
     public function checkInFiles(array $fileIds, int $userId)
@@ -40,15 +41,8 @@ class FileService
             foreach ($files as $file) {
                 $this->backupFile($file);
                 $file->update(['status' => 'reserved']);
-
-                // Log the check-out in file_checkouts
                 $this->fileRepository->createCheckin($file->id,$userId);
-//                FileCheckout::create([
-//                    'file_id' => $file->id,
-//                    'user_id' => $userId,
-//                    'checked_out_at' => null,
-//                    'checked_in_at' => now()
-//                ]);
+                $this->notifications->notifyGroupMembers($file);
             }
 
             DB::commit();

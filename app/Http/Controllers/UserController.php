@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Proxies\UserServiceProxy;
+use App\Services\NotificationService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,10 +11,12 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     protected $userService;
+    protected $notification;
 
-    public function __construct(UserServiceProxy $userService)
+    public function __construct(UserServiceProxy $userService,NotificationService $notification)
     {
         $this->userService = $userService;
+        $this->notification=$notification;
     }
 
     // Get all users
@@ -65,6 +68,18 @@ class UserController extends Controller
             'status' => true,
             'data' => $invitaions
         ], 200);
+    }
+
+    public function getMyNotifications()
+    {
+        $user = Auth::user();
+        return $this->notification->getMyNotifications($user);
+    }
+
+    public function deleteNotification($id)
+    {
+        $user=Auth::user();
+        return $this->notification->deleteNotification($user,$id);
     }
 
 }

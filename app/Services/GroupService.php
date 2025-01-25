@@ -98,19 +98,13 @@ class GroupService
             }
             // Fetch user to access FCM token
             $user = User::find($userId);
+            $groupName=Group::find($groupId);
+
 
             if ($user && $user->fcm_token) {
-                // Prepare notification data
                 $title = "Group Invitation";
-                $body = "You've been invited to join a group.";
-                $data = [
-                    'group_id' => $groupId,
-                    'user_id' => $userId,
-                    'type' => 'invite',
-                ];
-
-                // Send Firebase notification
-                $this->notificationService->sendFirebaseNotification($title, $body, $user->fcm_token, 'invite', $data);
+                $body = "You've been invited to join a group :".$groupName;
+                 $this->notificationService->sendNotificationToUser($title, $body,$user);
 
             }
         }
@@ -128,10 +122,12 @@ class GroupService
         if (!$groupUser) {
             throw new ModelNotFoundException('You must be an accepted member of the group to add files.');
         }
-
+        $owner=User::find($groupUser->groups->owner_id);
+        $user=User::find($userId);
         $fileName = $file->getClientOriginalName();
         $filePath = $file->storeAs("group_files/{$groupId}", $fileName, 'public');
-        $is_owner=$groupUser->groups->owner_id==$userId;
+
+        $is_owner=$owner->id==$userId;
     if($is_owner){
         $data['file']= $this->fileRepository->create([
             'name' => $fileName,
@@ -141,6 +137,7 @@ class GroupService
             'is_approved' => true
         ]);
         $data['message']='the file added successfully';
+
         return $data;
     }
     else{
@@ -152,6 +149,7 @@ class GroupService
             'is_approved' => false
         ]);
         $data['message']='File uploaded and awaiting approval';
+        $this->notificationService->sendNotificationToUser('upload file','the user '.$user->name.' upload file',$owner);
         return $data;
     }
 
@@ -175,7 +173,8 @@ class GroupService
     public function listUserGroups($userId)
     {
         $user = User::find($userId);
-        $groups = $user->groups()->with('owner:id,name,email')->get();
+        $groups = $user->groups()->with('owner:id,name,email')
+            ->withCount(['users as user_count', 'files as file_count'])->get();
         $groups->each(function ($group) use ($userId) {
             $group->is_owner = $group->owner_id === $userId;
         });
@@ -251,14 +250,10 @@ class GroupService
     public function test(){
         $title = "Group Invitation";
         $body = "You've been invited to join a group.";
-        $data = [
-
-            'user_id' => "1",
-            'type' => 'invite',
-        ];
-
-        // Send Firebase notification
-      return  $this->notificationService->sendFirebaseNotification($title, $body, "eQGjBdEXSt-D-LKYG-5vR6:APA91bHI7pAHH_S686gCvXBbp-x0Gey43PTaZm_lWIhAZCSSZnUhhEKtdonrtwE4l7wqzKL4wAXByxN2EW_F0NuTcXr3ZkKIIJj3MhG0Ugo0kEi9F__Ql6-Th5vMvPVL99PWLAFOTLV-", 'invite', $data);
+$user=User::where('id',4)->first();
+//        dispatch(new \App\Jobs\SendGroupInvitationNotification($title, $body, $user));
+       return $this->notificationService->sendNotificationToUser($title, $body, $user);
     }
+
 
 }

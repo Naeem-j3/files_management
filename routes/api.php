@@ -26,6 +26,7 @@ Route::get('/test',function (){
     return response()->json("hi",200);
 
 });
+
 Route::get('/test1', [GroupController::class, 'test']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -61,6 +62,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/groups/{groupId}/files/{fileId}/logs/download', [FileLogController::class, 'downloadLogsByFilePdf'])->middleware('check.group.membership');
     Route::get('/groups/{groupId}/users/{userId}/logs/download', [FileLogController::class, 'downloadLogsByUserPdf'])->middleware('check.owner');
     Route::get('/groups/{groupId}/files/{fileId}/download', [FileController::class, 'downloadFile'])->middleware('check.group.membership');
+
+    Route::get('/notifications', [UserController::class, 'getMyNotifications']);
+    Route::delete('/notifications/{id}', [UserController::class, 'deleteNotification']);
 });
 
 
